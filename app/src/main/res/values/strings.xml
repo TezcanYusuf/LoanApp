@@ -3,4 +3,11 @@
     <string name="userName">UserName</string>
     <string name="password">Password</string>
     <string name="login_button">Login</string>
+    <string name="load_loans">Load Loans</string>
+    <string name="hide_loans">Hide Loans</string>
+    <string name="loan_management">Loan Management</string>
+    <string name="user_name">UserName</string>
+    <string name="interest">Interest</string>
+    <string name="loan">Loan</string>
+    <string name="logout">Logout</string>
 </resources>

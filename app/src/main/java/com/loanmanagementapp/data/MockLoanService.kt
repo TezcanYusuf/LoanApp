@@ -21,7 +21,7 @@ class MockLoanService @Inject constructor() : LoanService {
                         name = jsonLoan.getString("name"),
                         principalAmount = jsonLoan.getDouble("principal_amount"),
                         interestRate = jsonLoan.getDouble("interest_rate"),
-                        status = LoanStatus.find(jsonLoan.getString("status")),
+                        loanStatus = LoanStatus.find(jsonLoan.getString("status")),
                         dueIn = jsonLoan.getInt("due_in")
                     )
                 )

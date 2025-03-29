@@ -1,6 +1,5 @@
 package com.loanmanagementapp.ui.screen.login
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.loanmanagementapp.data.User
@@ -14,15 +13,28 @@ class LoginViewModel @Inject constructor(
     private val preferenceManager: PreferenceManagerImpl
 ) : ViewModel() {
 
-    private val _username = mutableStateOf("")
-    val username: State<String> = _username
+    private val username = mutableStateOf("")
+
+    private val password = mutableStateOf("")
 
     fun onUsernameChange(newUsername: String) {
-        _username.value = newUsername
+        username.value = newUsername
     }
 
-    fun saveUser() {
+    fun onPasswordChange(newPassword: String) {
+        password.value = newPassword
+    }
+
+    private fun saveUser() {
         preferenceManager.user =
             User(userName = username.value)
+    }
+
+    //else kısmında hata setlenmeli ve hata mesajı gösterilmeli
+    fun checkUserNamePassword(onLoginSuccess: () -> Unit) {
+        if (username.value == "admin" && password.value == "1234") {
+            saveUser()
+            onLoginSuccess.invoke()
+        }
     }
 }

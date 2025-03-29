@@ -10,12 +10,12 @@ class LoanRepository @Inject constructor(private val loanService: LoanService) {
 
         for (loan in loans) {
             if (loan.dueIn <= 0) {
-                if (loan.status != LoanStatus.PAID) {
-                    loan.status = if (loan.principalAmount > 0) LoanStatus.OVERDUE else LoanStatus.DEFAULT
+                if (loan.loanStatus != LoanStatus.PAID) {
+                    loan.loanStatus = if (loan.principalAmount > 0) LoanStatus.OVERDUE else LoanStatus.DEFAULT
                 }
             } else {
                 // 2️⃣ Aktif krediler için faiz artır
-                if (loan.status != LoanStatus.PAID && loan.status != LoanStatus.DEFAULT) {
+                if (loan.loanStatus != LoanStatus.PAID && loan.loanStatus != LoanStatus.DEFAULT) {
                     loan.interestRate += 0.5
                 }
             }

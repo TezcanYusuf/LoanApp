@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +21,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loanmanagementapp.R
+import com.loanmanagementapp.ui.base.BaseText
 
 @Composable
 fun LoginScreen(
@@ -33,7 +33,7 @@ fun LoginScreen(
 
     val usernameLabel = stringResource(id = R.string.userName)
     val passwordLabel = stringResource(id = R.string.password)
-    val loginButtonText = stringResource(id = R.string.login_button)
+    val loginButtonLabel = stringResource(id = R.string.login_button)
 
     Column(
         modifier = Modifier
@@ -47,29 +47,29 @@ fun LoginScreen(
                 viewModel.onUsernameChange(it)
                 username = it
             },
-            label = { Text(usernameLabel) },
+            label = { BaseText(usernameLabel) },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(10.dp))
         OutlinedTextField(
             value = password,
             onValueChange = {
+                viewModel.onPasswordChange(it)
                 password = it
             },
-            label = { Text(passwordLabel) },
+            label = { BaseText(passwordLabel) },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
-                viewModel.saveUser()
-                onLoginSuccess.invoke()
+                viewModel.checkUserNamePassword(onLoginSuccess)
             },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(loginButtonText)
+            BaseText(loginButtonLabel)
         }
     }
 }

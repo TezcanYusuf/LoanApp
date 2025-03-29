@@ -4,6 +4,6 @@ data class Loan(
     val name: String,
     var principalAmount: Double,
     var interestRate: Double,
-    var status: LoanStatus,
+    var loanStatus: LoanStatus,
     var dueIn: Int
 )
