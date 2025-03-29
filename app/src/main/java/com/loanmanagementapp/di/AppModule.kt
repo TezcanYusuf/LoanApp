@@ -6,6 +6,7 @@ import com.loanmanagementapp.data.LoanRepository
 import com.loanmanagementapp.data.LoanService
 import com.loanmanagementapp.data.MockLoanService
 import com.loanmanagementapp.utils.LoanCalculatorProvider
+import com.loanmanagementapp.utils.strategy.DefaultCalculateStrategy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +34,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideLoanCalculatorProvider(): LoanCalculatorProvider {
-        return LoanCalculatorProvider()
+        return LoanCalculatorProvider(provideDefaultCalculateStrategy())
+    }
+
+    @Provides
+    @Singleton
+    fun provideDefaultCalculateStrategy(): DefaultCalculateStrategy {
+        return DefaultCalculateStrategy()
     }
 }
