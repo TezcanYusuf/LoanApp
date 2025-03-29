@@ -3,11 +3,6 @@ package com.loanmanagementapp.ext
 import android.content.SharedPreferences
 import com.google.gson.Gson
 
-/**
- * @user: omer.karaca
- * @date: 2020-01-15
- */
-
 inline fun <reified T> SharedPreferences.get(key: String): T? {
 
     if (!this.contains(key)) {
