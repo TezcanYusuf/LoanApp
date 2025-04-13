@@ -1,4 +1,4 @@
-package com.loanmanagementapp.utils
+package com.loanmanagementapp.utils.strategy
 
 import com.loanmanagementapp.data.Loan
 

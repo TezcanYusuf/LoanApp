@@ -1,6 +1,7 @@
 package com.loanmanagementapp.ui.screen.home.adapter
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,11 +15,15 @@ import com.loanmanagementapp.ui.base.BaseText
 import com.loanmanagementapp.ui.screen.home.HomeViewModel
 
 @Composable
-fun LoanItem(loan: Loan, viewModel: HomeViewModel, interestLabel: String, loanLabel: String) {
+fun LoanItem(
+    loan: Loan, viewModel: HomeViewModel, interestLabel: String, loanLabel: String,
+    onClick: (Loan) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
+            .clickable { onClick(loan) }
             .padding(16.dp)
     ) {
         BaseText(loan.name)

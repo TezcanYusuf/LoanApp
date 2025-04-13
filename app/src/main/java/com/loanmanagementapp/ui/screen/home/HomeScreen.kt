@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.loanmanagementapp.R
 import com.loanmanagementapp.data.Loan
+import com.loanmanagementapp.navigation.NavigationBundleEnum
 import com.loanmanagementapp.navigation.NavigationEnum
 import com.loanmanagementapp.ui.base.BaseText
 import com.loanmanagementapp.ui.base.BaseTitleText
@@ -26,8 +27,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavController) {
     val context = LocalContext.current
-    var loans by remember { mutableStateOf(emptyList<Loan>()) }
     val coroutineScope = rememberCoroutineScope()
+    val loans by viewModel.loans.collectAsState(initial = emptyList())
 
     val loanManagementLabel = stringResource(id = R.string.loan_management)
     val loadLoansLabel = stringResource(id = R.string.load_loans)
@@ -80,12 +81,9 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavCon
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(onClick = {
-                if (loans.isEmpty())
-                    coroutineScope.launch {
-                        loans = viewModel.updateLoans(context)
-                    }
-                else
-                    loans = emptyList()
+                coroutineScope.launch {
+                    viewModel.updateLoans(context)
+                }
             }) {
                 Text(buttonLabel, fontSize = 16.sp)
             }
@@ -93,7 +91,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavCon
             Spacer(modifier = Modifier.height(16.dp))
 
             if (loans.isNotEmpty()) {
-                LazyColumn(
+                LazyColumn(//todo bir itema tıklayınca detay sayfasına git detay sayfasına text koyman yetiyor
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -103,11 +101,20 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavCon
                             loan = loan,
                             viewModel = viewModel,
                             interestLabel = interestLabel,
-                            loanLabel = loanLabel
+                            loanLabel = loanLabel,
+                            onClick = {
+                                navigateToDetail(navController, loan) //navigate to detail
+                            }
                         )
                     }
                 }
             }
         }
     }
+}
+
+fun navigateToDetail(navController: NavController, loan: Loan) {
+    // Loan json'ında id olsa navController.navigate("loanDetail/${loan.id}") bu şekilde yapılabilirdi.
+    navController.currentBackStackEntry?.savedStateHandle?.set(NavigationBundleEnum.LOAN.key, loan)
+    navController.navigate(NavigationEnum.DETAIL.screen)
 }

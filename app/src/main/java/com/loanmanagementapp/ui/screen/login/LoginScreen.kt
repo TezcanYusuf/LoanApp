@@ -51,7 +51,7 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
+        OutlinedTextField(//todo provider yaz password ve username için observable
             value = password,
             onValueChange = {
                 viewModel.onPasswordChange(it)
