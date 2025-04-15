@@ -2,15 +2,17 @@ package com.loanmanagementapp.ui.screen.login
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.loanmanagementapp.data.LoginUseCase
 import com.loanmanagementapp.data.User
-import com.loanmanagementapp.utils.PreferenceManagerImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val preferenceManager: PreferenceManagerImpl
+    private var loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     private val username = mutableStateOf("")
@@ -25,16 +27,12 @@ class LoginViewModel @Inject constructor(
         password.value = newPassword
     }
 
-    private fun saveUser() {
-        preferenceManager.user =
-            User(userName = username.value)
-    }
-
-    //else kısmında hata setlenmeli ve hata mesajı gösterilmeli
     fun checkUserNamePassword(onLoginSuccess: () -> Unit) {
-        if (username.value == "admin" && password.value == "1234") {
-            saveUser()
-            onLoginSuccess.invoke()
+        viewModelScope.launch {
+            loginUseCase.execute(User(userName = username.value), password = password.value)
+                .collect {
+                    onLoginSuccess()
+                }
         }
     }
 }

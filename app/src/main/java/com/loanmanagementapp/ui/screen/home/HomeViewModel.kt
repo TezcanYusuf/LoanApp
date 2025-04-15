@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.loanmanagementapp.data.Loan
 import com.loanmanagementapp.data.LoanUpdateUseCase
-import com.loanmanagementapp.utils.LoanCalculatorProvider
 import com.loanmanagementapp.utils.PreferenceManagerImpl
+import com.loanmanagementapp.utils.strategy.calculate.LoanCalculatorProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

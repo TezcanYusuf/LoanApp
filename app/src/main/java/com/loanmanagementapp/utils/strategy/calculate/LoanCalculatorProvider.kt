@@ -1,7 +1,6 @@
-package com.loanmanagementapp.utils
+package com.loanmanagementapp.utils.strategy.calculate
 
 import com.loanmanagementapp.data.Loan
-import com.loanmanagementapp.utils.strategy.DefaultCalculateStrategy
 import javax.inject.Inject
 import javax.inject.Singleton
 

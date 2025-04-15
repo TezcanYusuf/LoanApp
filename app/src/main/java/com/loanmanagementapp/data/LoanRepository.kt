@@ -1,28 +1,23 @@
 package com.loanmanagementapp.data
+
 import android.content.Context
+import com.loanmanagementapp.utils.strategy.processing.LoanProcessingContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @ViewModelScoped
-class LoanRepository @Inject constructor(private val loanService: LoanService) {
+class LoanRepository @Inject constructor(
+    private val loanService: LoanService,
+    private val updateContext: LoanProcessingContext
+) {
     suspend fun updateLoans(context: Context): List<Loan> {
-        val loans = loanService.loadLoans(context).toMutableList()
-        //todo daha da düzenle interface ve strateji ekle
-        for (loan in loans) {
-            if (loan.dueIn <= 0) {
-                if (loan.loanStatus != LoanStatus.PAID) {
-                    loan.loanStatus = if (loan.principalAmount > 0) LoanStatus.OVERDUE else LoanStatus.DEFAULT
-                }
-            } else if (loan.loanStatus != LoanStatus.DEFAULT) {
-                // 2️⃣ Aktif krediler için faiz artır
-                loan.interestRate += 0.5
-            }
+        val loans = loanService.loadLoans(context)
 
-            // 5️⃣ Gün sayısını azalt (En sona alınmalı)
-            loan.dueIn -= 1
+        val updatedLoans = loans.map { loan ->
+            updateContext.applyAll(loan)
         }
 
-        loanService.saveLoans(loans)
-        return loans
+        loanService.saveLoans(updatedLoans)
+        return updatedLoans
     }
 }
