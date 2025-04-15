@@ -18,6 +18,9 @@ navigationCompose = "2.8.9"
 ui = "1.7.8"
 gson = "2.6.2"
 materialIconVersion = "1.7.8"
+mockkVersion = "1.13.5"
+coroutineTestVersion = "1.7.3"
+kotlinTestVersion = "1.9.10"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +31,10 @@ hilt-compiler-v250 = { module = "com.google.dagger:hilt-compiler", version.ref =
 javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
+coroutineTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTestVersion" }
+kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlinTestVersion" }
+
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
