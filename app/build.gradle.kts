@@ -89,6 +89,9 @@ dependencies {
 
     //Gson Convertor
     implementation(libs.squareup.gson.converter)
+    
+    //Material Icon
+    implementation(libs.materialIcon)
 }
 
 hilt {

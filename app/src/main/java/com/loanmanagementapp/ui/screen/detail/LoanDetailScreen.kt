@@ -46,7 +46,9 @@ fun LoanDetailScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BaseText("$interestLabel: ${viewModel.getLoan(navController)?.interestRate}")
+            BaseText(
+                "$interestLabel: ${viewModel.getLoan(navController)?.interestRate}"
+            )
         }
     }
 }

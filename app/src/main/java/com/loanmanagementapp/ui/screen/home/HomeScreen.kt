@@ -76,7 +76,9 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel(), navController: NavCon
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BaseText(text = "$userNameLabel: ${viewModel.getUserName()}")
+            BaseText(
+                text = "$userNameLabel: ${viewModel.getUserName()}",
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 

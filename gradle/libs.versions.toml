@@ -17,6 +17,7 @@ material3 = "1.3.1"
 navigationCompose = "2.8.9"
 ui = "1.7.8"
 gson = "2.6.2"
+materialIconVersion = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
 squareup-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gson" }
+materialIcon = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
